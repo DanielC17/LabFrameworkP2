@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+</head>
+<body>
+    <h1>Formulário</h1>
+
+    <form action="{% url 'add' %}" method="POST" style="display:flex;flex-direction: column;align-items: flex-start;">
+        {% csrf_token %}
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="">
+
+        <label for="qtd">Quantidade estoque:</label>
+        <input type="number" name="qtd" id="">
+        
+        <label for="preco">Preço Unitario:</label>
+        <input type="number" name="preco" id="">
+
+        <label for="imagem">Imagem: </label>
+        <textarea id="imagem" name="imagem"></textarea>
+
+        <label for="ativo">Ativo</label>
+        <input type="checkbox" name="ativo" id="" value="True">
+        <button type="submit">Adcionar</button>
+    </form>
+
+    <a href="{% url 'index' %}">Voltar</a>
+</body>
+</html>
