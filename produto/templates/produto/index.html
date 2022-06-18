@@ -7,23 +7,58 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Adcionar um produto</h1>
+    <form method="POST" name="form_produto" id="form_produto" style="display:flex;flex-direction: column;align-items: flex-start;">
+        {% csrf_token %}
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="">
+
+        <label for="qtd">Quantidade estoque:</label>
+        <input type="number" name="qtd" id="">
+        
+        <label for="preco">Preço Unitario:</label>
+        <input type="number" name="preco" id="">
+
+        <label for="imagem">Imagem: </label>
+        <textarea id="imagem" name="imagem"></textarea>
+
+        <label for="ativo">Ativo</label>
+        <input type="checkbox" name="ativo" id="" value="True">
+        <button type="submit">Adcionar</button>
+    </form>
+
     <h1>Produto</h1>
 
-    <a href="{% url 'add' %}"">Adicionar Produto</a>
-
-    {% for produto in lista_produto %}
-
-        <p>Nome: {{produto.nome_produto}}</p>
-        <p>Preço: R${{produto.preco_unitario}}</p>
-        <p>Quantidade: {{produto.qtd_estoque}}</p>
-        <p>Ativo: {{produto.ativo}}</p>
-        <img src = "{{produto.imagem}}" style=" width: 300px; height: 400px;"</p>
-
-    {% endfor %}
-
-
-   
     
+    <div id="content">
+        {% for produto in lista_produto %}
 
+            <h1>Nome: {{produto.nome_produto}}</h1>
+            <p>Preço: R${{produto.preco_unitario}}</p>
+            <p>Quantidade: {{produto.qtd_estoque}}</p>
+            <p>Ativo: {{produto.ativo}}</p>
+            <img src = "{{produto.imagem}}" style=" width: 250px; height: 250px;"</p>
+            <hr>
+
+        {% endfor %}
+    </div>
 </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#form_produto").submit(function (e) {
+        e.preventDefault();
+        
+        $.ajax({
+            type : "POST", 
+            url: "{% url 'add' %}",
+            data: $('#form_produto').serialize(),
+
+            success: function(res) {
+                console.log(res);
+                $('#content').html(res)
+                }
+            });
+        });
+
+</script>

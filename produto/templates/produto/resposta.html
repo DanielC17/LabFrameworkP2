@@ -1,0 +1,12 @@
+<div id="content">
+    {% for produto in lista_produto %}
+
+        <h1>Nome: {{produto.nome_produto}}</h1>
+        <p>Preço: R${{produto.preco_unitario}}</p>
+        <p>Quantidade: {{produto.qtd_estoque}}</p>
+        <p>Ativo: {{produto.ativo}}</p>
+        <img src = "{{produto.imagem}}" style=" width: 250px; height: 250px;"</p>
+        <hr>
+
+    {% endfor %}
+</div>
