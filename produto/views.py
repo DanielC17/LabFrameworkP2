@@ -29,4 +29,4 @@ def busca(request):
             produtos = Produto.objects.filter(nome=srch)
         else:
             produtos = Produto.objects.all()
-    return render(request, "result.html", context={'lista_produto':lista_produto})
+    return render(request, "resultado_busca.html", context={'lista_produto':lista_produto})

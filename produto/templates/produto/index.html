@@ -42,6 +42,24 @@
 
         {% endfor %}
     </div>
+    <div>
+        <form action="" name="form_busca" id="form_busca">
+            <label for="search">Search:</label>
+            <input type="search" name="search" id="search_busca">
+            <button type="submit">Search</button>
+        </form>
+
+        <h2>lista de Produtos</h2>
+        <div id="content_busca">
+            {% for produto in lista_produto%}
+            <p>
+                
+            </p>
+            {% empty %}
+                <p>Não há produtos :(</p>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -60,5 +78,19 @@
                 }
             });
         });
+
+    $("#form_busca").submit(function (e){
+    e.preventDefault();
+    let param = $('#search_busca').val();
+    $.ajax({
+        type : "GET",
+        url : "{% url 'busca' %}",
+        data: {'src': param},
+        
+        success: function(res) {
+            $('content_busca').html(res)
+            }
+        });
+    });
 
 </script>
